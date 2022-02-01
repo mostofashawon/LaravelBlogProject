@@ -3,14 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Models\PostModel;
+use Validator;
 
 class MainController extends Controller
 {
     function data($id,$id1){
         return view('data',['firstkey'=>$id,'secondkey'=>$id1]);
      // return 'ID1 :'.$id. '<br> ID2:'.$id1;
+    
   
     }
 
@@ -29,23 +32,25 @@ class MainController extends Controller
      // Get data from DB Using Model
     function getDataDB(){
       return PostModel::all();
+     
     }
      // Insert data into DB
       function postData(Request $request){
-      $post = new PostModel;
-      $post->type = $request->type;
-      $post->name = $request->name;
-      $post->description = $request->description;
-      $statusResult = $post->save();
+      // $post = new PostModel;
+      // $post->type = $request->type;
+      // $post->name = $request->name;
+      // $post->description = $request->description;
+      // $statusResult = $post->save();
 
-      if($statusResult){
-        return "your data has been saved";
-      }
-      else{
-        return "your data has not been saved";
-      }
+      // if($statusResult){
+      //   return "your data has been saved";
+      // }
+      // else{
+      //   return "your data has not been saved";
+      // }
+
+  }
       
-    }
 
     // QueryBuilder (get,update,insert,delete data from DB without Model)
     function getQueryBuilder(Request $request){
@@ -98,4 +103,27 @@ class MainController extends Controller
 
       } 
 
-}
+      // Validation check for api
+
+      function validationCheck(Request $request){
+
+        $rules = array(
+            "type" => "required",
+            "name" => "required",
+            "description" => "required"
+        );
+
+        $validator = Validator::make($request->all(),$rules);
+
+        if($validator->fails()) {
+          return $validator->errors();
+        }
+
+        else{
+          return "all feild valid";
+        }
+
+      }
+    }
+
+//}

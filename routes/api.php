@@ -26,3 +26,5 @@ Route::get('data','App\Http\Controllers\MainController@getDataDB');
 Route::get('get','App\Http\Controllers\MainController@getQueryBuilder');
 
 Route::post('post','App\Http\Controllers\MainController@uploadImage');
+
+Route::post('validate','App\Http\Controllers\MainController@validationCheck');
