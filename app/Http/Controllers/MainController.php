@@ -1,11 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Models\PostModel;
+use App\Models\MemberModel;
+use App\Models\GroupModel;
+use App\Models\PersonModel;
+use App\Models\AddressModel;
 use Validator;
 
 class MainController extends Controller
@@ -36,18 +39,18 @@ class MainController extends Controller
     }
      // Insert data into DB
       function postData(Request $request){
-      // $post = new PostModel;
-      // $post->type = $request->type;
-      // $post->name = $request->name;
-      // $post->description = $request->description;
-      // $statusResult = $post->save();
+      $post = new PostModel;
+      $post->type = $request->type;
+      $post->name = $request->name;
+      $post->description = $request->description;
+      $statusResult = $post->save();
 
-      // if($statusResult){
-      //   return "your data has been saved";
-      // }
-      // else{
-      //   return "your data has not been saved";
-      // }
+      if($statusResult){
+        return "your data has been saved";
+      }
+      else{
+        return "your data has not been saved";
+      }
 
   }
       
@@ -116,14 +119,26 @@ class MainController extends Controller
         $validator = Validator::make($request->all(),$rules);
 
         if($validator->fails()) {
-          return $validator->errors();
+         //  return $validator->errors();
+         return response()->json($validator->errors(),401);
         }
 
         else{
-          return "all feild valid";
+          return "all field valid";
         }
+
+      }
+
+      // Nested Json Response
+       function getNestedJson(){
+      //  $res = MemberModel::with('groupInfo:group_id,name,description')->get();
+      //    return $res;
+      //   return $res->select(['id','member_name','group_id'])->get();
+    
+          // For proper Nested Result
+       $res = PersonModel::with('address:person_id,id,address_name')->get();
+       return $res;
 
       }
     }
 
-//}

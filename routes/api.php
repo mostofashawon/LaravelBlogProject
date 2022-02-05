@@ -28,3 +28,5 @@ Route::get('get','App\Http\Controllers\MainController@getQueryBuilder');
 Route::post('post','App\Http\Controllers\MainController@uploadImage');
 
 Route::post('validate','App\Http\Controllers\MainController@validationCheck');
+
+Route::get('member','App\Http\Controllers\MainController@getNestedJson');
