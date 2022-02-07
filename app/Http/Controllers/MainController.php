@@ -142,11 +142,15 @@ class MainController extends Controller
       }
           // SearchOption
       function searchName(Request $request){
+
+               //OneWay 
         //  $query = $request->name;
         //  $result = DB::table('persons')
         //                 ->where('name','like',"%$query%")->get();
         //           return $result;
-        
+
+
+              //Otherway for Search
                   $query = $request->name;
                   $result = PersonModel::where('name','like',"%$query%")->get();
                            return $result;      
