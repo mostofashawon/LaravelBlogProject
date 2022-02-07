@@ -152,7 +152,10 @@ class MainController extends Controller
 
               //Otherway for Search
                   $query = $request->name;
-                  $result = PersonModel::where('name','like',"%$query%")->get();
+               //   $result = PersonModel::where('name','like',"%$query%")->get();
+                   //show particular column or items
+                  $result = PersonModel::select('person_id','name')
+                              ->where('name','like',"%$query%")->get();
                            return $result;      
       }
     }
