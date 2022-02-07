@@ -10,12 +10,12 @@ class AddressModel extends Model
     use HasFactory;
     protected $table= 'address';
 
-    public function addressInfo(){
+    // public function addressInfo(){
         
-              return $this->hasOne(PersonModel::class);
+    //           return $this->hasOne(PersonModel::class);
     
         
-         }
+    //      }
 
 
 }

@@ -13,6 +13,7 @@ class PersonModel extends Model
     public function address(){
         
               return $this->belongsTo(AddressModel::class,'person_id');
+              
          }
 
 }
